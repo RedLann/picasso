@@ -824,8 +824,12 @@ public class Picasso {
       return this;
     }
 
-    /** Create the {@link Picasso} instance. */
     public Picasso build() {
+      return build(Dispatcher.BATCH_DELAY);
+    }
+
+      /** Create the {@link Picasso} instance. */
+    public Picasso build(int customBatchDelay) {
       Context context = this.context;
 
       if (downloader == null) {
@@ -843,7 +847,7 @@ public class Picasso {
 
       Stats stats = new Stats(cache);
 
-      Dispatcher dispatcher = new Dispatcher(context, service, HANDLER, downloader, cache, stats);
+      Dispatcher dispatcher = new Dispatcher(context, service, HANDLER, downloader, cache, stats, customBatchDelay);
 
       return new Picasso(context, dispatcher, cache, listener, transformer, requestHandlers, stats,
           defaultBitmapConfig, indicatorsEnabled, loggingEnabled);

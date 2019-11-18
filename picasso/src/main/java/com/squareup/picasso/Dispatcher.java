@@ -76,7 +76,7 @@ class Dispatcher {
   static final int REQUEST_BATCH_RESUME = 13;
 
   private static final String DISPATCHER_THREAD_NAME = "Dispatcher";
-  private static final int BATCH_DELAY = 200; // ms
+  static final int BATCH_DELAY = 200; // ms
 
   final DispatcherThread dispatcherThread;
   final Context context;
@@ -93,11 +93,13 @@ class Dispatcher {
   final List<BitmapHunter> batch;
   final NetworkBroadcastReceiver receiver;
   final boolean scansNetworkChanges;
+  final int customBatchDelay;
 
   boolean airplaneMode;
 
   Dispatcher(Context context, ExecutorService service, Handler mainThreadHandler,
-      Downloader downloader, Cache cache, Stats stats) {
+             Downloader downloader, Cache cache, Stats stats, int customBatchDelay) {
+    this.customBatchDelay = customBatchDelay;
     this.dispatcherThread = new DispatcherThread();
     this.dispatcherThread.start();
     Utils.flushStackLocalLeaks(dispatcherThread.getLooper());
@@ -449,7 +451,7 @@ class Dispatcher {
     }
     batch.add(hunter);
     if (!handler.hasMessages(HUNTER_DELAY_NEXT_BATCH)) {
-      handler.sendEmptyMessageDelayed(HUNTER_DELAY_NEXT_BATCH, BATCH_DELAY);
+      handler.sendEmptyMessageDelayed(HUNTER_DELAY_NEXT_BATCH, customBatchDelay);
     }
   }
 

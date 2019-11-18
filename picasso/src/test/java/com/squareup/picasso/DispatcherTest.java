@@ -32,6 +32,8 @@ import org.mockito.Mock;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
+import javax.xml.ws.Dispatch;
+
 import static android.content.Context.CONNECTIVITY_SERVICE;
 import static android.content.Intent.ACTION_AIRPLANE_MODE_CHANGED;
 import static android.content.pm.PackageManager.PERMISSION_DENIED;
@@ -585,6 +587,6 @@ public class DispatcherTest {
     when(context.getSystemService(Context.CONNECTIVITY_SERVICE)).thenReturn(connectivityManager);
     when(context.checkCallingOrSelfPermission(anyString())).thenReturn(
         scansNetworkChanges ? PERMISSION_GRANTED : PERMISSION_DENIED);
-    return new Dispatcher(context, service, mainThreadHandler, downloader, cache, stats);
+    return new Dispatcher(context, service, mainThreadHandler, downloader, cache, stats, Dispatcher.BATCH_DELAY);
   }
 }

@@ -65,13 +65,13 @@
     </dependency>
   </dependencies>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>org.codehaus.mojo</groupId>
-        <artifactId>emma-maven-plugin</artifactId>
-        <version>1.0-alpha-3</version>
-      </plugin>
-    </plugins>
-  </reporting>
+<!--  <reporting>-->
+<!--    <plugins>-->
+<!--      <plugin>-->
+<!--        <groupId>org.codehaus.mojo</groupId>-->
+<!--        <artifactId>emma-maven-plugin</artifactId>-->
+<!--        <version>1.0-alpha-3</version>-->
+<!--      </plugin>-->
+<!--    </plugins>-->
+<!--  </reporting>-->
 </project>
